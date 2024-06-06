@@ -27,40 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['fullName'] = $fullName;
     }
 
-    // // Handle profile photo upload
-    // $target_directory = "users/profilePhotos/";
-    // $target_file = $target_directory . basename($_FILES["file"]["profilePhoto"]);
-    // $uploadOk = 1;
-    // $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-    // // Check if the file exists
-    // if (file_exists($target_file)) {
-    //     $profilePhoto_error = "Photo already exists";
-    //     $uploadOk = 0;
-    // }
-
-    // // Check the file size
-    // if ($_FILES["file"]["size"] > 500000) {
-    //     $profilePhoto_error = "Photo is too large";
-    //     $uploadOk = 0;
-    // }
-
-    // // Allow certain file formats
-    // if ($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'jpeg') {
-    //     $profilePhoto_error = "Sorry, only JPG,PNG and JPEG files are allowed";
-    //     $uploadOk = 0;
-    // }
-
-    // // Check if uploadOk is set to 0 by an error
-    // if ($uploadOk == 0) {
-    //     $profilePhoto_error = "Photo wasn't uploaded";
-    // } else {
-    //     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-    //         $file_path = $target_file;
-    //         $_SESSION["profilePhoto"] = $file_path;
-    //     }
-    // }
-
     // Ensure that there are no errors in the fullName section before uploading images
     if (empty($fullName_error)) {
         // Process profile photo upload
@@ -99,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="breadcrumb">
     <div class="container">
         <div class="row">
-            <span><a href="index.php?page=home">Home</a> > <a href="index.php?page=users/user_login">User Login</a> > <span style="font-weight: 200;">Registration Step 1</span> > Registration Step 2</span>
+            <span><a href="index.php?page=home">Home</a> > <a href="index.php?page=users/user_login">User Login</a> > <span style="font-weight: 200;">Registration Step 1</span> | Registration Step 2</span>
         </div>
     </div>
 </div>
@@ -108,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="form">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <!-- Title -->
                 <h3></h3>
                 <hr>

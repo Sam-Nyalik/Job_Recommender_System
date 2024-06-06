@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($emailAddress_error) && empty($password_error) && empty($confirmPassword_error)) {
         // Redirect user to registration step 2
         header("Location: index.php?page=users/user_register_step2");
-        exit();
+        exit;
     }
 }
 
@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="row">
                         <!-- Password -->
-                        <div class="col-5">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="Password">Password</label>
                                 <input type="password" name="password" class="form-control <?php echo (!empty($password_error)) ? 'is-invalid' : ''; ?>">
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
 
                         <!-- Confirm Password -->
-                        <div class="col-5">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="ConfirmPassword">Confirm Password</label>
                                 <input type="password" name="confirmPassword" class="form-control <?php echo (!empty($confirmPassword_error)) ? 'is-invalid' : ''; ?>">

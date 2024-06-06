@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="breadcrumb">
     <div class="container">
         <div class="row">
-            <span><a href="index.php?page=admin/admn_dashboard">Dashboard</a> > <a href="index.php?page=admin/counties/all_counties">All Counties</a> > Add County</span>
+            <span><a href="index.php?page=admin/admin_dashboard">Dashboard</a> > <a href="index.php?page=admin/counties/all_counties">All Counties</a> > Add County</span>
         </div>
     </div>
 </div>
