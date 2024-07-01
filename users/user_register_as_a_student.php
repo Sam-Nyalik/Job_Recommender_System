@@ -5,6 +5,12 @@
 // Start session
 session_start();
 
+// Unset non_student sessions
+unset($_SESSION["recentJobTitle"]);
+unset($_SESSION["employmentType"]);
+unset($_SESSION["mostRecentCompany"]);
+unset($_SESSION["previousEmployee_true"]);
+
 // Error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
