@@ -5,6 +5,13 @@
 // Start session
 session_start();
 
+// unset student sessions
+unset($_SESSION["universityName"]);
+unset($_SESSION["courseName"]);
+unset($_SESSION["startYear"]);
+unset($_SESSION["endYear"]);
+unset($_SESSION["student_true"]);
+
 // Error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
