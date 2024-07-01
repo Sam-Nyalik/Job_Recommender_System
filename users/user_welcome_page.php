@@ -5,12 +5,16 @@
 // Start session
 session_start();
 
+// Error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Include functions
 include_once "functions/functions.php";
 $pdo = databaseConnection();
 
 // Define variables
-$emailAddress = $password = $fullName = $profilePhoto = $cv = $countyName = $recentJobTitle = $employmentType = $mostRecentCompany = $expertise = $previousEmployee_true = $universityName = $courseName = $startYear = $endYear = $student_true = $preferredJobTitle = $preferredLocation = "";
+$emailAddress = $password = $fullName = $profilePhoto = $cv = $countyName = $recentJobTitle = $employmentType = $mostRecentCompany = $expertise = $previousEmployee_true = $universityName = $courseName = $startYear = $endYear = $student_true = $preferredJobTitle = $preferredLocation = $location_id = "";
 $emailAddress_error = $password_error = $fullName_error = $profilePhoto_error = $cv_error = $countyName_error = $recentJobTitle_error = $employmentType_error = $mostRecentCompany_error = $expertise_error = $previousEmployee_true_error = $universityName_error = $courseName_error = $startYear_error = $endYear_error = $student_true_error = $preferredJobTitle_error = $preferredLocation_error = "";
 
 // Process form data when the form is submitted
@@ -55,6 +59,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('The system did not capture your location. Please go back to registration step 3'); </script>";
     } else {
         $countyName = trim($_SESSION["countyName"]);
+        // Fetch countyName ID from the counties table
+        $sql = "SELECT * FROM counties WHERE county_name = :countyName";
+        if ($stmt = $pdo->prepare($sql)) {
+            $stmt->bindParam(":countyName", $param_county_name, PDO::PARAM_STR);
+            $param_county_name = $countyName;
+            if ($stmt->execute()) {
+                if ($row = $stmt->fetch()) {
+                    $location_id = $row['id'];
+                } else {
+                    echo "There was an error fetching the county name ID";
+                }
+            }
+        }
     }
 
     // Validate recentJobTitle
@@ -62,6 +79,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('The system did not capture your recent job title. Please go back to registration step 4'); </script>";
     } else {
         $recentJobTitle = trim($_SESSION["recentJobTitle"]);
+        // Fetch job_titles ID from the job_titles table
+        $sql = "SELECT * FROM job_titles WHERE name = :titleName";
+        if ($stmt = $pdo->prepare($sql)) {
+            $stmt->bindParam(":titleName", $param_titleName, PDO::PARAM_STR);
+            $param_titleName = $recentJobTitle;
+            if ($stmt->execute()) {
+                if ($row = $stmt->fetch()) {
+                    $jobTitle_id = $row["id"];
+                } else {
+                    echo "There was an error fetching the job title ID";
+                }
+            }
+        }
     }
 
     // Validate employmentType
@@ -69,6 +99,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('The system did not capture your recent employment type. Please go back to registration step 4'); </script>";
     } else {
         $employmentType = trim($_SESSION["employmentType"]);
+        // Fetch employment type id from the employemtType table
+        $sql = "SELECT * FROM employmentType WHERE employmentType_name = :employmentTypeName";
+        if ($stmt = $pdo->prepare($sql)) {
+            $stmt->bindParam(":employmentTypeName", $param_employmentTypeName, PDO::PARAM_STR);
+            $param_employmentTypeName = $employmentType;
+            if ($stmt->execute()) {
+                if ($row = $stmt->fetch()) {
+                    $employmentTypeName_id = $row['id'];
+                } else {
+                    echo "There was an error fetching the employment type name id";
+                }
+            }
+        }
     }
 
     // Validate mostRecentCompany
@@ -83,6 +126,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('The system did not capture your expertise as a previous employee. Please go back to registration step 4'); </script>";
     } else {
         $expertise = trim($_SESSION["expertise"]);
+        // Fetch skills id from the database based on user input
+        $sql = "SELECT * FROM skills WHERE skill_name = :skillName";
+        if ($stmt = $pdo->prepare($sql)) {
+            $stmt->bindParam(":skillName", $param_skill_name, PDO::PARAM_STR);
+            $param_skill_name = $expertise;
+            if ($stmt->execute()) {
+                if ($row = $stmt->fetch()) {
+                    $previous_employee_expertise_id = $row['id'];
+                } else {
+                    echo "There was an error fetching skill id from the database";
+                }
+            }
+        }
     }
 
     // Validate student universityName
@@ -104,6 +160,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('The system did not capture your expertise as a student. Please go back to registration step 4'); </script>";
     } else {
         $expertise = trim($_SESSION["expertise"]);
+        // Fetch skill id from the database based on user input
+        $sql = "SELECT * FROM skills WHERE skill_name = :skillName";
+        if ($stmt = $pdo->prepare($sql)) {
+            $stmt->bindParam(":skillName", $param_skillName, PDO::PARAM_STR);
+            $param_skillName = $expertise;
+            if ($stmt->execute()) {
+                if ($row = $stmt->fetch()) {
+                    $student_expertise_id = $row['id'];
+                } else {
+                    echo "There was an error fetching your skill id from the database";
+                }
+            }
+        }
     }
 
     // Validate university startYear
@@ -125,6 +194,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('The system did not capture your preferred job title. Please go back to registration step 5'); </script>";
     } else {
         $preferredJobTitle = trim($_SESSION["preferredJobTitle"]);
+        // Fetch jobTitle id from the database based on user input
+        $sql = "SELECT * FROM job_titles WHERE name = :jobTitleName";
+        if ($stmt = $pdo->prepare($sql)) {
+            $stmt->bindParam(":jobTitleName", $param_jobTitleName, PDO::PARAM_STR);
+            $param_jobTitleName = $preferredJobTitle;
+            if ($stmt->execute()) {
+                if ($row = $stmt->fetch()) {
+                    $preferredJobTitle_id = $row['id'];
+                } else {
+                    echo "There was an error fetching preffered job title id from the database";
+                }
+            }
+        }
     }
 
     // Validate preferred job location
@@ -132,14 +214,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('The system did not capture your preferred job location. Please go back to registration step 5'); </script>";
     } else {
         $preferredLocation = trim($_SESSION["preferredLocation"]);
+        // Fetch county name id from the database based on user input
+        $sql = "SELECT * FROM counties WHERE county_name = :countyName";
+        if ($stmt = $pdo->prepare($sql)) {
+            $stmt->bindParam(":countyName", $param_countyName, PDO::PARAM_STR);
+            $param_countyName = $preferredLocation;
+            if ($stmt->execute()) {
+                if ($row = $stmt->fetch()) {
+                    $preferredLocation_id = $row['id'];
+                } else {
+                    echo "There was an error fetching preferred location id";
+                }
+            }
+        }
     }
 
     // Prepare an INSERT statement into the users table
     $sql = "INSERT INTO users(userName, emailAddress, password, profilePhoto, location, skills, universityAttended, universityStartYear, universityEndYear, recentJobTitle, recentEmploymentType, recentEmploymentCompany, preferredJobTitle,
-    preferredJobLocation, course, student, non_student) VALUES(:userName, :emailAddress, :password, :profilePhoto, :location, :skills, :universityAttended, :universityStartYear, :universityEndYear, :recentJobTitle, :recentEmploymentType, :recentEmploymentCompany,
-    :preferredJobTitle, :preferredJobLocation, :course, :student, :non_student)";
+    preferredJobLocation, course, student, non_student, skill_id, location_id, preferredJobTitle_id, preferredJobLocation_id) VALUES(:userName, :emailAddress, :password, :profilePhoto, :location, :skills, :universityAttended, :universityStartYear, :universityEndYear, :recentJobTitle, :recentEmploymentType, :recentEmploymentCompany,
+    :preferredJobTitle, :preferredJobLocation, :course, :student, :non_student, :skill_id, :location_id, :preferredJobTitle_id, :preferredJobLocation_id)";
 
-    if($stmt = $pdo->prepare($sql)){
+    if ($stmt = $pdo->prepare($sql)) {
         // Bind variables to the prepared statement as parameters
         $stmt->bindParam(":userName", $param_userName, PDO::PARAM_STR);
         $stmt->bindParam(":emailAddress", $param_emailAddress, PDO::PARAM_STR);
@@ -152,12 +247,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(":universityEndYear", $param_universityEndYear, PDO::PARAM_STR);
         $stmt->bindParam(":recentJobTitle", $param_recentJobTitle, PDO::PARAM_STR);
         $stmt->bindParam(":recentEmploymentType", $param_recentEmploymentType, PDO::PARAM_STR);
-        $stmt->bindParam(":recentEmplymentCompany", $param_recentEmploymentCompany, PDO::PARAM_STR);
+        $stmt->bindParam(":recentEmploymentCompany", $param_recentEmploymentCompany, PDO::PARAM_STR);
         $stmt->bindParam(":preferredJobTitle", $param_preferredJobTitle, PDO::PARAM_STR);
         $stmt->bindParam(":preferredJobLocation", $param_preferredJobLocation, PDO::PARAM_STR);
         $stmt->bindParam(":course", $param_course, PDO::PARAM_STR);
         $stmt->bindParam(":student", $param_student_true, PDO::PARAM_INT);
         $stmt->bindParam(":non_student", $param_nonStudent, PDO::PARAM_INT);
+        $stmt->bindParam(":skill_id", $param_skill_id, PDO::PARAM_INT);
+        $stmt->bindParam(":location_id", $param_location_id, PDO::PARAM_INT);
+        $stmt->bindParam(":preferredJobTitle_id", $param_jobTitle_id, PDO::PARAM_INT);
+        $stmt->bindParam(":preferredJobLocation_id", $param_jobLocation_id, PDO::PARAM_INT);
+
+        // Set parameters
+        $param_userName = $fullName;
+        $param_emailAddress = $emailAddress;
+        $param_password = password_hash($password, PASSWORD_DEFAULT);
+        $param_profilePhoto = $profilePhoto;
+        $param_location = $countyName;
+        $param_skills = $expertise;
+        $param_universityAttended = $universityName;
+        $param_universityStartYear = $startYear;
+        $param_universityEndYear = $endYear;
+        $param_recentJobTitle = $recentJobTitle;
+        $param_recentEmploymentType = $employmentType;
+        $param_recentEmploymentCompany = $mostRecentCompany;
+        $param_preferredJobTitle = $preferredJobTitle;
+        $param_preferredJobLocation = $preferredLocation;
+        $param_course = $courseName;
+        $param_student_true = $_SESSION["student_true"];
+        $param_nonStudent = $_SESSION["previousEmployee_true"];
+        $param_skill_id = $previous_employee_expertise_id;
+        $param_location_id = $location_id;
+        $param_jobTitle_id = $preferredJobTitle_id;
+        $param_jobLocation_id = $preferredLocation_id;
+
+        // Attempt to execute
+        if ($stmt->execute()) {
+            header("Location: index.php?page=users/user_login");
+            exit;
+        }
     }
 }
 
@@ -174,7 +302,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="breadcrumb">
     <div class="container">
         <div class="row">
-            <span><a href="index.php?page=home">Home</a> > <a href="index.php?page=users/user_login">User Login</a> | <span style="font-weight: 200;"> <a href="index.php?page=users/user_register_step1">Registration Step 1</a> </span> | <span style="font-weight: 200;"> Registration Step 2</span> |<span style="font-weight: 200;"> Registration Step 3</span> | <span style="font-weight: 200;">Registration Step 4</span> | <span style="font-weight: 200;">Registration Step 5</span> | Finish</span>
+            <span><a href="index.php?page=home">Home</a> > <a href="index.php?page=users/user_login">User Login</a> | <span style="font-weight: 200;"> <a href="index.php?page=users/user_register_step1">Registration Step 1</a> </span> | <span style="font-weight: 200;"> <a href="index.php?page=users/user_register_step2">Registration Step 2</a> </span> |<span style="font-weight: 200;"> <a href="index.php?page=users/user_register_step3">Registration Step 3</a></span> | <span style="font-weight: 200;"><a href="index.php?page=users/user_register_step4">Registration Step 4</a></span> | <span style="font-weight: 200;"><a href="index.php?page=users/user_register_step5">Registration Step 5</a></span> | Finish</span>
         </div>
     </div>
 </div>
