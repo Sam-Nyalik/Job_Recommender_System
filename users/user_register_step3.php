@@ -25,6 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else {
         $counties = trim($_POST["countyName"]);
         $_SESSION["countyName"] = $counties;
+        // Fetch county ID based on user input
     }
 
     // Check for errors before proceeding to the next section
