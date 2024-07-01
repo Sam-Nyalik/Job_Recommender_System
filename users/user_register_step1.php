@@ -1,7 +1,6 @@
 <!-- USER REGISTRATION - EMAIL AND PASSWORD SECTION -->
 
 <?php
-
 // Start session
 session_start();
 
