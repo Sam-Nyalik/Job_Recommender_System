@@ -1,7 +1,6 @@
 <!-- USER REGISTRATION - FULLNAME, PROFILE PHOTO AND RESUME UPLOAD -->
 
 <?php
-
 // Start session
 session_start();
 
