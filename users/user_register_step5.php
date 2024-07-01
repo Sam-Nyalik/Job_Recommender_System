@@ -1,7 +1,6 @@
 <!-- USER - PREFERRED JOB SECTION -->
 
 <?php
-
 // Start session
 session_start();
 
