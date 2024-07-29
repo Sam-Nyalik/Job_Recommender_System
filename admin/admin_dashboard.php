@@ -62,6 +62,10 @@ $pdo = databaseConnection();
     <div class="container">
         <div class="row">
             <div class="col-md-3">
+                <h4>Admin Profile</h4>
+                <a href="">View More</a>
+            </div>
+            <div class="col-md-3">
                 <h4>Jobs</h4>
                 <a href="index.php?page=admin/jobs/all_jobs">View More</a>
             </div>
@@ -86,12 +90,24 @@ $pdo = databaseConnection();
                 <a href="index.php?page=admin/jobs/employment_types">View More</a>
             </div>
             <div class="col-md-3">
+                <h4>Job Levels</h4>
+                <a href="index.php?page=admin/jobs/all_job_levels">View More</a>
+            </div>
+            <div class="col-md-3">
                 <h4>Skills</h4>
                 <a href="index.php?page=admin/users/all_skills">View More</a>
             </div>
             <div class="col-md-3">
                 <h4>Job Titles</h4>
                 <a href="index.php?page=admin/jobs/all_job_titles">View More</a>
+            </div>
+            <div class="col-md-3">
+                <h4>Job Industries</h4>
+                <a href="index.php?page=admin/jobs/all_job_industries">View More</a>
+            </div>
+            <div class="col-md-3">
+                <h4>All Administrators</h4>
+                <a href="index.php?page=admin/accounts/admin_profiles">View More</a>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<!-- ALL COUNTIES SECTION -->
+<!-- ALL JOB INDUSTRIES SECTION -->
 
 <?php
 
@@ -19,7 +19,7 @@ $pdo = databaseConnection();
 ?>
 
 <!-- Header Template -->
-<?= headerTemplate('ADMIN | ALL COUNTIES'); ?>
+<?= headerTemplate('ADMIN | ALL JOB INDUSTRIES'); ?>
 
 <!-- Admin Navbar -->
 <?= adminNavbarTemplate(); ?>
@@ -28,7 +28,7 @@ $pdo = databaseConnection();
 <div class="breadcrumb">
     <div class="container">
         <div class="row">
-            <span><a href="index.php?page=admin/admin_dashboard">Dashboard</a> > All Counties</span>
+            <span><a href="index.php?page=admin/admin_dashboard">Dashboard</a> > All Job Industries</span>
         </div>
     </div>
 </div>
@@ -38,43 +38,42 @@ $pdo = databaseConnection();
 <div id="section_title">
     <div class="container">
         <div class="row">
-            <h4 class="text-center">All Counties</h4>
+            <h4 class="text-center">All Job Industries</h4>
         </div>
     </div>
 </div>
 
-<!-- Table for all counties -->
+<!-- Table for all job industries -->
 <div id="full_table_display">
     <div class="container">
         <div class="row">
             <table class="table table-bordered table-hover">
-                <!-- Fetch county names from the database -->
+                <!-- Fetch job industries from the database -->
                 <?php
-                $sql = $pdo->prepare("SELECT * FROM counties");
+                $sql = $pdo->prepare("SELECT * FROM job_industries");
                 $sql->execute();
-                $all_counties_in_database = $sql->fetchAll(PDO::FETCH_ASSOC);
+                $database_all_job_industries = $sql->fetchAll(PDO::FETCH_ASSOC);
                 $count = 1;
                 ?>
+
                 <thead>
                     <th>#</th>
-                    <th>County Name</th>
+                    <th>Industry Name</th>
                     <th>Action</th>
                 </thead>
-                <tbody>
-                    <?php foreach ($all_counties_in_database as $all_counties) : ?>
 
-                        <tr>
-                            <td><?= $count++; ?></td>
-                            <td><?= $all_counties["county_name"]; ?></td>
-                            <td><a href="#" class="text-success">View More</a></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
+                <?php foreach ($database_all_job_industries as $job_industries) : ?>
+                    <tbody>
+                        <td><?= $count++; ?></td>
+                        <td><?= $job_industries["industryName"]; ?></td>
+                        <td><a href="">View More </a></td>
+                    </tbody>
+                <?php endforeach; ?>
             </table>
 
-            <!-- Link Button -->
+            <!-- Link button -->
             <div class="link_button">
-                <a href="index.php?page=admin/counties/add_county">Add County</a>
+                <a href="index.php?page=admin/jobs/add_job_industry">Add job industry</a>
             </div>
         </div>
     </div>

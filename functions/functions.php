@@ -50,7 +50,7 @@ function homepageNavbarTemplate()
              <div class=\"collapse navbar-collapse justify-content-end\" id=\"navbarSupportedContent\">
                 <ul class=\"navbar-nav\">
                     <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"#\">Jobs</a>
+                        <a class=\"nav-link\" href=\"index.php?page=jobs/explore_all_jobs\">Jobs</a>
                     </li>
                     <li class=\"nav-item\">
                         
@@ -94,16 +94,16 @@ function adminNavbarTemplate()
     $element = "
         <nav class=\"navbar navbar-expand-lg bg-body-tertiary\">
             <div class=\"container-fluid\">
-                <a href=\"index.php?page=admin/admin_dashboard\" class=\"navbar-brand\">NYALIK HRS</a>
+                <a href=\"index.php?page=admin/admin_dashboard\" class=\"navbar-brand\">NYALIK JRS</a>
                 <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                     <span class=\"navbar-toggler-icon\"></span>
                 </button>
              <div class=\"collapse navbar-collapse justify-content-end\" id=\"navbarSupportedContent\">
                 <ul class=\"navbar-nav\">
                     <li class=\"nav-item\">
-                        <a class=\"nav-link active\" aria-current=\"page\" href=\"#\">Dashboard</a>
+                        <a class=\"nav-link active\" aria-current=\"page\" href=\"index.php?page=admin/admin_dashboard\">Dashboard</a>
                     </li>
-                    <li class=\"nav-item dropdown\">
+                    <li class=\"nav-item dropdown\" style=\"display: none\">
                         <a class=\"nav-link dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                              Account
                         </a>
@@ -112,12 +112,12 @@ function adminNavbarTemplate()
                             <li><a class=\"dropdown-item\" href=\"index.php?page=admin/logout\">Logout</a></li>
                         </ul>
                 </li>
-                <li class=\"nav-item\">
+                <li class=\"nav-item\" style=\"display: none\">
                     <a class=\"nav-link\">Logout</a>
                 </li>
                 <li class=\"nav-item\">
                     <a href=\"index.php?page=admin/admin_logout\" class=\"nav-link\">Sign Out</a>
-                </li>
+                </list>
                 </ul>
             </div>
         </div>

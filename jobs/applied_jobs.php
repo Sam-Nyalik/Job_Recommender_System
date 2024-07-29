@@ -1,4 +1,4 @@
-<!-- DEFAULT HOMEPAGE -->
+<!-- APPLIED JOBS SECTION -->
 
 <?php
 
@@ -9,28 +9,22 @@ session_start();
 include_once "functions/functions.php";
 $pdo = databaseConnection();
 
-// Fetch job details from the database
-// $sql = $pdo->prepare("SELECT * FROM posted_jobs WHERE status = 1");
-// $sql->execute();
-// $database_all_posted_jobs = $sql->fetchAll(PDO::FETCH_ASSOC);
+// Fetch userId from the URL
+$user_id = false;
+if (isset($_GET["userId"])) {
+    $user_id = $_GET["userId"];
+}
 
-// 
+// Fetch application details of the user
+$sql = $pdo->prepare("SELECT * FROM job_applications WHERE candidateId = $user_id AND application_status = 0");
+$sql->execute();
+$database_all_applied_jobs = $sql->fetchAll(PDO::FETCH_ASSOC);
+$count = 1;
+
 ?>
 
-<style>
-    .form-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-
-    .form-group {
-        flex: 1;
-    }
-</style>
-
 <!-- Header Template -->
-<?= headerTemplate('HOME'); ?>
+<?= headerTemplate('USER | APPLIED JOBS'); ?>
 
 <!-- Homepage Navbar -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -72,7 +66,7 @@ $pdo = databaseConnection();
                 <?php foreach ($database_user_data as $user_data) : ?>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?page=jobs/applied_jobs&userId=<?=$user_data['userId'];?>">Job Applications</a>
+                            <a class="nav-link" href="index.php?page=jobs/applied_jobs&userId=<?= $user_data['userId']; ?>">Job Applications</a>
                         </li>
                         <li class="nav-item">
 
@@ -177,111 +171,44 @@ $pdo = databaseConnection();
     </div>
 </div>
 
-<!-- Landing Page -->
-<div id="landing_text">
+<!-- Section Title -->
+<div id="section_title">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <div class="title">
-                    <h1>Explore and discover <br> the right jobs for <br> you</h1>
-                </div>
-                <?php
-                if (!isset($_SESSION["userLoggedIn"]) && $_SESSION["userLoggedIn"] !== true) {
-                ?>
-                    <a href="index.php?page=users/user_login" class="signIn_link">Sign in with email</a>
-                <?php } else {
-                ?>
-                    <a href="index.php?page=jobs/job_search" class="signIn_link">Search for jobs here</a>
-                <?php }
-                ?>
-            </div>
-
-            <div class="col-md-6">
-                <img src="images/image2.jpg" alt="" class="img-fluid">
-            </div>
+            <h4 class="text-center">Job Applications History</h4>
         </div>
     </div>
 </div>
 
-<!-- Suggested Job searches -->
-<div id="suggested_job_searches">
+<!-- History of previous job applications -->
+<div id="full_table_display">
     <div class="container">
         <div class="row">
-            <div class="title">
-                <h2>Find the right job vacancies in Kenya</h2>
-            </div>
-            <h5>Experience-based filtering</h5>
-            <p>Find jobs that suite your experience level</p>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <th>#</th>
+                    <th>Company Hiring</th>
+                    <th>Job Title</th>
+                    <th>Date</th>
+                    <th>Application status</th>
+                </thead>
 
-            <div class="row">
-                <div class="col-md-4">
-                    <h3>Senior Level</h3>
-                    <!-- NUMBER OF ALL JOBS IN THE SENIOR LEVEL FROM THE DATABASE -->
-                    <?php
-                    $sql = "SELECT * FROM posted_jobs WHERE job_level LIKE '%Senior Level%' AND status = 1";
-                    if ($stmt = $pdo->prepare($sql)) {
-                        // Attempt to execute
-                        if ($stmt->execute()) {
-                            $senior_level_num_of_rows = $stmt->rowCount();
-                        }
-                    }
-
-                    ?>
-                    <p>Total Number: <?php echo $senior_level_num_of_rows; ?></p>
-                    <a href="index.php?page=jobs/senior_level_jobs">Explore Jobs</a>
-                </div>
-
-                <div class="col-md-4">
-                    <h3>Mid Level</h3>
-                    <!-- NUMBER OF ALL JOBS IN THE MID LEVEL FROM THE DATABASE -->
-                    <?php
-                    $sql = "SELECT * FROM posted_jobs WHERE job_level LIKE '%Mid Level%' AND status = 1";
-                    if ($stmt = $pdo->prepare($sql)) {
-                        if ($stmt->execute()) {
-                            $mid_level_num_of_rows = $stmt->rowCount();
-                        }
-                    }
-                    ?>
-                    <p>Total Number: <?php echo $mid_level_num_of_rows; ?></p>
-                    <a href="index.php?page=jobs/mid_level_jobs">Explore Jobs</a>
-                </div>
-
-                <div class="col-md-4">
-                    <h3>Internship & Graduate</h3>
-                    <!-- NUMBER OF ALL JOBS IN THE INTERNSHIP/GEADUATE FROM THE DATABASE -->
-                    <?php
-                    $sql = "SELECT * FROM posted_jobs WHERE job_level LIKE '%Internship & Graduate%' AND status = 1";
-                    if ($stmt = $pdo->prepare($sql)) {
-                        if ($stmt->execute()) {
-                            $internship_level_num_of_rows = $stmt->rowCount();
-                        }
-                    }
-                    ?>
-                    <p>Total Number: <?php echo $internship_level_num_of_rows; ?></p>
-                    <a href="index.php?page=jobs/internship_level_jobs">Explore Jobs</a>
-                </div>
-            </div>
-
-            <div class="explore_all_jobs">
-                <a href="index.php?page=jobs/explore_all_jobs">Explore all jobs</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Companies currently hiring -->
-<div id="companies_currently_hiring">
-    <div class="container">
-        <div class="row">
-            <div class="title">
-                <h2>Companies currently hiring in Kenya</h2>
-            </div>
-
-            <!-- LIST OF ALL COMPANIES HIRING FROM THE DATABASE -->
-
-            <div class="explore_all_jobs">
-                <a href="index.php?page=jobs/companies_hiring">View all companies hiring</a>
-            </div>
+                <?php foreach ($database_all_applied_jobs as $applied_jobs) : ?>
+                    <tbody>
+                        <td><?= $count++; ?></td>
+                        <td><?= $applied_jobs["companyName"]; ?></td>
+                        <td><?= $applied_jobs["posted_jobTitle"]; ?></td>
+                        <td><?= $applied_jobs["date_created"]; ?></td>
+                        <td><?php
+                            if ($appled_jobs["application_status"] == 0) {
+                                echo "<span class='text-danger'>Received. Please wait for feedback</span>";
+                            } else {
+                                echo "<span class='text-success'>Application approved</span>";
+                            }
+                            ?></td>
+                    </tbody>
+                <?php endforeach; ?>
+            </table>
         </div>
     </div>
 </div>

@@ -90,14 +90,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <!-- Profile Photo -->
                     <div class="form-group my-3">
                         <label for="profilePhoto">Profile Photo</label>
-                        <input type="file" name="profilePhoto" class="form-control">
+                        <input type="file" name="profilePhoto" class="form-control <?php echo (!empty($profilePhoto_error)) ? 'is-invalid' : ''; ?>">
                         <span class="errors text-danger"><?php echo $profilePhoto_error; ?></span>
                     </div>
 
                     <!-- Resume -->
                     <div class="form-group my-3">
                         <label for="resume">CV</label>
-                        <input type="file" name="cv" class="form-control">
+                        <input type="file" name="cv" class="form-control <?php echo (!empty($cv_error)) ? 'is-invalid' : ''; ?>">
                         <span class="errors text-danger"><?php echo $cv_error; ?></span>
                     </div>
 

@@ -231,8 +231,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Prepare an INSERT statement into the users table
     $sql = "INSERT INTO users(userName, emailAddress, password, profilePhoto, location, skills, universityAttended, universityStartYear, universityEndYear, recentJobTitle, recentEmploymentType, recentEmploymentCompany, preferredJobTitle,
-    preferredJobLocation, course, student, non_student, skill_id, location_id, preferredJobTitle_id, preferredJobLocation_id) VALUES(:userName, :emailAddress, :password, :profilePhoto, :location, :skills, :universityAttended, :universityStartYear, :universityEndYear, :recentJobTitle, :recentEmploymentType, :recentEmploymentCompany,
-    :preferredJobTitle, :preferredJobLocation, :course, :student, :non_student, :skill_id, :location_id, :preferredJobTitle_id, :preferredJobLocation_id)";
+    preferredJobLocation, course, student, non_student, skill_id, location_id, preferredJobTitle_id, preferredJobLocation_id, resume) VALUES(:userName, :emailAddress, :password, :profilePhoto, :location, :skills, :universityAttended, :universityStartYear, :universityEndYear, :recentJobTitle, :recentEmploymentType, :recentEmploymentCompany,
+    :preferredJobTitle, :preferredJobLocation, :course, :student, :non_student, :skill_id, :location_id, :preferredJobTitle_id, :preferredJobLocation_id, :resume)";
 
     if ($stmt = $pdo->prepare($sql)) {
         // Bind variables to the prepared statement as parameters
@@ -257,6 +257,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(":location_id", $param_location_id, PDO::PARAM_INT);
         $stmt->bindParam(":preferredJobTitle_id", $param_jobTitle_id, PDO::PARAM_INT);
         $stmt->bindParam(":preferredJobLocation_id", $param_jobLocation_id, PDO::PARAM_INT);
+        $stmt->bindParam(":resume", $param_resume, PDO::PARAM_STR);
 
         // Set parameters
         $param_userName = $fullName;
@@ -280,6 +281,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $param_location_id = $location_id;
         $param_jobTitle_id = $preferredJobTitle_id;
         $param_jobLocation_id = $preferredLocation_id;
+        $param_resume = $cv;
 
         // Attempt to execute
         if ($stmt->execute()) {

@@ -71,8 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check for errors before dealing with the database
     if (empty($candidate_fullName_error) && empty($candidate_emailAddress_error) && empty($posted_jobTitle_error)) {
         // Prepare an INSERT statament
-        $sql = "INSERT INTO job_applications(candidateName, candidateEmailAddress, candidateId, companyName, posted_jobTitle, posted_jobLocation, posted_jobDescription, posted_jobEmploymentType, posted_jobId) 
-        VALUES(:candidateName, :candidateEmailAddress, :candidateId, :companyName, :posted_jobTitle, :posted_jobLocation, :posted_jobDescription, :posted_jobEmploymentType, :posted_jobId)";
+        $sql = "INSERT INTO job_applications(candidateName, candidateEmailAddress, candidateId, companyName, posted_jobTitle, posted_jobLocation, posted_jobDescription, posted_jobEmploymentType, posted_jobId, application_status) 
+        VALUES(:candidateName, :candidateEmailAddress, :candidateId, :companyName, :posted_jobTitle, :posted_jobLocation, :posted_jobDescription, :posted_jobEmploymentType, :posted_jobId, :application_status)";
 
         if ($stmt = $pdo->prepare($sql)) {
             // Bind variables
@@ -85,6 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(":posted_jobDescription", $param_posted_jobDescription, PDO::PARAM_STR);
             $stmt->bindParam(":posted_jobEmploymentType", $param_posted_jobEmploymentType, PDO::PARAM_STR);
             $stmt->bindParam(":posted_jobId", $param_posted_jobId, PDO::PARAM_INT);
+            $stmt->bindParam(":application_status", $param_application_status, PDO::PARAM_INT);
 
             // Set parameters
             $param_candidateName = $candidate_fullName;
@@ -96,6 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_posted_jobDescription = $posted_jobDescription;
             $param_posted_jobEmploymentType = $posted_jobEmploymentType;
             $param_posted_jobId = $jobId;
+            $param_application_status = 0;
 
             // Attempt to execute
             if ($stmt->execute()) {
@@ -145,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php foreach ($database_user_data as $user_data) : ?>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Job Applications</a>
+                            <a class="nav-link" href="index.php?page=jobs/applied_jobs&userId=<?= $userId; ?>">Job Applications</a>
                         </li>
                         <li class="nav-item">
 
