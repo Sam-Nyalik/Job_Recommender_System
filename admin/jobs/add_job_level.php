@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <!-- Add a new job level form -->
                 <form action="index.php?page=admin/jobs/add_job_level" method="post" class="login_form">
-                    <!-- Jobe level name -->
+                    <!-- Job level name -->
                     <div class="form-group my-3">
                         <label for="levelName">Level Name</label>
                         <input type="text" name="levelName" class="form-control <?php echo (!empty($levelName_error)) ? 'is-invalid' : ''; ?>">

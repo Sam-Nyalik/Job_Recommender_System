@@ -58,14 +58,14 @@ $pdo = databaseConnection();
                 <thead>
                     <th>#</th>
                     <th>Level Name</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                 </thead>
 
                 <?php foreach ($database_all_job_levels as $all_job_levels) : ?>
                     <tbody>
                         <td><?= $count++; ?></td>
                         <td><?= $all_job_levels["name"]; ?></td>
-                        <td><a href="#">View More</a> </td>
+                        <!-- <td><a href="#">View More</a> </td> -->
                     </tbody>
                 <?php endforeach; ?>
             </table>

@@ -5,6 +5,10 @@
 // Start session
 session_start();
 
+// Error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Check if admin is loggedIn or not
 if (!isset($_SESSION["admin_loggedIn"]) && $_SESSION["admin_loggedIn"] !== true) {
     // Redirect admin to the login page
@@ -12,9 +16,26 @@ if (!isset($_SESSION["admin_loggedIn"]) && $_SESSION["admin_loggedIn"] !== true)
     exit;
 }
 
+// Deactivate job script
+$job_id = false;
+if (isset($_GET['jobId'])) {
+    $job_id = $_GET['jobId'];
+}
+
 // Include functions
 include_once "functions/functions.php";
 $pdo = databaseConnection();
+
+if (isset($_GET['del'])) {
+    $sql = "UPDATE posted_jobs SET status = 0 WHERE jobId = :jobId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(":jobId", $param_job_id, PDO::PARAM_INT);
+    $param_job_id = $job_id;
+    if ($stmt->execute()) {
+        echo "<script>alert('Posted Job has been deactivated successfully!'); </script>";
+    }
+}
+
 
 ?>
 
@@ -60,7 +81,6 @@ $pdo = databaseConnection();
                     <th>Job Title</th>
                     <th>Job Location</th>
                     <th>Company Hiring</th>
-                    <th>No. of applicants</th>
                     <th>Date posted</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -74,22 +94,15 @@ $pdo = databaseConnection();
                         <td><?= $all_job_postings["jobTitle"]; ?></td>
                         <td><?= $all_job_postings["jobLocation"]; ?></td>
                         <td><?= $all_job_postings["companyName"]; ?></td>
-                        <td><?php
-                            if ($all_job_postings["totalApplicants"] == NULL) {
-                                echo "0";
-                            } else {
-                                echo $all_job_postings["totalApplicants"];
-                            }
-                            ?></td>
                         <td><?= $all_job_postings["date_created"]; ?></td>
-                        <td><?php 
-                            if($all_job_postings["status"] == 1){
+                        <td><?php
+                            if ($all_job_postings["status"] == 1) {
                                 echo "<span class='text-success'>Active</span>";
                             } else {
                                 echo "<span class='text-danger'>Not Active</span>";
                             }
-                        ?></td>
-                        <td><a href="#">View More</a></td>
+                            ?></td>
+                        <td><a href="index.php?page=admin/jobs/all_jobs&jobId=<?= $all_job_postings['jobId']; ?>&del=delete" class="text-danger">Deactivate Job</a></td>
                     </tbody>
                 <?php endforeach; ?>
             </table>

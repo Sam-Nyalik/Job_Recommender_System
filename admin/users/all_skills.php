@@ -16,6 +16,22 @@ if (!isset($_SESSION["admin_loggedIn"]) && $_SESSION["admin_loggedIn"] !== true)
 include_once "functions/functions.php";
 $pdo = databaseConnection();
 
+// Delete skill script
+$skill_id = false;
+if(isset($_GET['skill_id'])){
+    $skill_id = $_GET['skill_id'];
+}
+
+if(isset($_GET['del'])){
+    $sql = "DELETE FROM skills WHERE id = :skillId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(":skillId", $param_skillId, PDO::PARAM_INT);
+    $param_skillId = $skill_id;
+    if($stmt->execute()){
+        echo "<script>alert('Skill has been deleted successfully!');</script>";
+    }
+}
+
 ?>
 
 <!-- Header Template -->
@@ -57,14 +73,14 @@ $pdo = databaseConnection();
                 <thead>
                     <th>#</th>
                     <th>Skill Name</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                 </thead>
 
                 <?php foreach($all_database_skills as $database_skills): ?>
                 <tbody>
                     <td><?= $count++; ?></td>
                     <td><?= $database_skills["skill_name"]; ?></td>
-                    <td><a href="#">View More</a></td>
+                    <!-- <td><a href="#">View More</a> | <a href="index.php?page=admin/users/all_skills&skill_id=<?=$database_skills['id']; ?>&del=delete" class="text-danger">Delete</a></td> -->
                 </tbody>
                 <?php endforeach; ?>
 

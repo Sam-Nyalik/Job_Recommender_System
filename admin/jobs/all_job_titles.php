@@ -16,6 +16,22 @@ if (!isset($_SESSION["admin_loggedIn"]) && $_SESSION["admin_loggedIn"] !== true)
 include_once "functions/functions.php";
 $pdo = databaseConnection();
 
+// Delete job title script
+$job_title_id = false;
+if(isset($_GET['title_id'])){
+    $job_title_id = $_GET['title_id'];
+}
+
+if(isset($_GET['title_id'])){
+    $sql = "DELETE FROM job_titles WHERE id = :jobTitle_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(":jobTitle_id", $param_jobTitle_id, PDO::PARAM_INT);
+    $param_jobTitle_id = $job_title_id;
+    if($stmt->execute()){
+        echo "<script>alert('Job title has been deleted successfully!');</script>";
+    }
+}
+
 ?>
 
 <!-- Header Template -->
@@ -63,7 +79,7 @@ $pdo = databaseConnection();
                 <tbody>
                     <td><?=$count++; ?></td>
                     <td><?=$database_job_titles["name"];?></td>
-                    <td><a href="#">View More</a></td>
+                    <td><a href="index.php?page=admin/jobs/all_job_titles&title_id=<?=$database_job_titles['id']; ?>&del=delete" class="text-danger">Delete</a></td>
                 </tbody>
                 <?php endforeach; ?>
             </table>

@@ -13,6 +13,13 @@ ini_set('display_errors', 1);
 include_once 'functions/functions.php';
 $pdo = databaseConnection();
 
+// Check if user is loggedIn or not
+if (!isset($_SESSION["userLoggedIn"]) && $_SESSION["userLoggedIn"] !== true) {
+    // Redirect user to the login page
+    header("Location: index.php?page=users/user_login");
+    exit;
+}
+
 // Fetch job data from the database
 $jobId = false;
 if (isset($_GET["jobId"])) {

@@ -9,6 +9,13 @@ session_start();
 include_once "functions/functions.php";
 $pdo = databaseConnection();
 
+// Check if user is loggedIn or not
+if(!isset($_SESSION["userLoggedIn"]) && $_SESSION["userLoggedIn"] !== true){
+    // Redirect user to the login page
+    header("Location: index.php?page=users/user_login");
+    exit;
+}
+
 // Fetch userId from the URL
 $user_id = false;
 if (isset($_GET["userId"])) {
@@ -16,7 +23,7 @@ if (isset($_GET["userId"])) {
 }
 
 // Fetch application details of the user
-$sql = $pdo->prepare("SELECT * FROM job_applications WHERE candidateId = $user_id AND application_status = 0");
+$sql = $pdo->prepare("SELECT * FROM job_applications WHERE candidateId = $user_id");
 $sql->execute();
 $database_all_applied_jobs = $sql->fetchAll(PDO::FETCH_ASSOC);
 $count = 1;
@@ -200,10 +207,12 @@ $count = 1;
                         <td><?= $applied_jobs["posted_jobTitle"]; ?></td>
                         <td><?= $applied_jobs["date_created"]; ?></td>
                         <td><?php
-                            if ($appled_jobs["application_status"] == 0) {
+                            if ($applied_jobs["application_status"] == 0) {
                                 echo "<span class='text-danger'>Received. Please wait for feedback</span>";
+                            } elseif($applied_jobs["application_status"] == 2) {
+                                echo "<span class='text-success'>Application has been declined. Please try again when there is an opening</span>";
                             } else {
-                                echo "<span class='text-success'>Application approved</span>";
+                                echo "<span class='text-success'>Application approved. You will receive a call</span>";
                             }
                             ?></td>
                     </tbody>

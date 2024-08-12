@@ -61,53 +61,75 @@ $pdo = databaseConnection();
 <div id="main_links">
     <div class="container">
         <div class="row">
+
+            <!-- ADMIN PROFILE -->
             <div class="col-md-3">
                 <h4>Admin Profile</h4>
-                <a href="">View More</a>
+                <a href="index.php?page=admin/admin_profile">View More</a>
             </div>
+
+            <!-- JOBS -->
             <div class="col-md-3">
                 <h4>Jobs</h4>
                 <a href="index.php?page=admin/jobs/all_jobs">View More</a>
             </div>
+
+            <!-- USERS -->
             <div class="col-md-3">
                 <h4>Users</h4>
                 <a href="index.php?page=admin/users/all_users">View More</a>
             </div>
+
+            <!-- JOB APPLICATIONS -->
             <div class="col-md-3">
                 <h4>Job Applications</h4>
                 <a href="index.php?page=admin/jobs/all_jobs_applications">View More</a>
             </div>
             <div class="col-md-3">
-                <h4>Recruiters</h4>
-                <a href="index.php?page=admin/job_recruiters/all_job_recruiters">View More</a>
-            </div>
+                <h4>Approved Job Applications</h4>
+                <a href="index.php?page=admin/jobs/all_approved_job_applications">View More</a>
+            </div> 
+
+            <!-- COUNTIES -->
             <div class="col-md-3">
                 <h4>Counties</h4>
                 <a href="index.php?page=admin/counties/all_counties">View More</a>
             </div>
+
+            <!-- EMPLOYMENT TYPES -->
             <div class="col-md-3">
                 <h4>Employment Types</h4>
                 <a href="index.php?page=admin/jobs/employment_types">View More</a>
             </div>
+
+            <!-- JOB LEVELS -->
             <div class="col-md-3">
                 <h4>Job Levels</h4>
                 <a href="index.php?page=admin/jobs/all_job_levels">View More</a>
             </div>
+
+            <!-- SKILLS -->
             <div class="col-md-3">
                 <h4>Skills</h4>
                 <a href="index.php?page=admin/users/all_skills">View More</a>
             </div>
+
+            <!-- JOB TITLES -->
             <div class="col-md-3">
                 <h4>Job Titles</h4>
                 <a href="index.php?page=admin/jobs/all_job_titles">View More</a>
             </div>
+
+            <!-- JOB INDUSTRIES -->
             <div class="col-md-3">
                 <h4>Job Industries</h4>
                 <a href="index.php?page=admin/jobs/all_job_industries">View More</a>
             </div>
+
+            <!-- ALL ADMINS -->
             <div class="col-md-3">
                 <h4>All Administrators</h4>
-                <a href="index.php?page=admin/accounts/admin_profiles">View More</a>
+                <a href="index.php?page=admin/other_admin/all_admins">View More</a>
             </div>
         </div>
     </div>

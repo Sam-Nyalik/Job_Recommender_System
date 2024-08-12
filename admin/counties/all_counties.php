@@ -5,6 +5,9 @@
 // Start session
 session_start();
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Check whether admin is loggedIn or not
 if (!isset($_SESSION["admin_loggedIn"]) && $_SESSION["admin_loggedIn"] !== true) {
     // Redirect admin to the login page
@@ -15,6 +18,17 @@ if (!isset($_SESSION["admin_loggedIn"]) && $_SESSION["admin_loggedIn"] !== true)
 // Functions
 include_once "functions/functions.php";
 $pdo = databaseConnection();
+
+// Delete county script
+if(isset($_GET['del'])){
+    $sql = "DELETE FROM counties WHERE id = :county_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam("county_id", $param_county_id, PDO::PARAM_INT);
+    $param_county_id = $_GET["county_id"];
+    if($stmt->execute()){
+        echo "<script>alert('County has been deleted successfully!')</script>";
+    }
+}
 
 ?>
 
@@ -66,7 +80,7 @@ $pdo = databaseConnection();
                         <tr>
                             <td><?= $count++; ?></td>
                             <td><?= $all_counties["county_name"]; ?></td>
-                            <td><a href="#" class="text-success">View More</a></td>
+                            <td><a href="index.php?page=admin/counties/individual_county&countyId=<?=$all_counties['id'];?>" class="text-success">View More</a> | <a href="index.php?page=admin/counties/all_counties&county_id=<?=$all_counties['id']; ?>&del=delete" class="text-danger tooltips" tooltip-placement="top" tooltip="Remove">Delete</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

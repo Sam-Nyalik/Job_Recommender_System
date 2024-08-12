@@ -16,6 +16,22 @@ if (!isset($_SESSION["admin_loggedIn"]) && $_SESSION["admin_loggedIn"] !== true)
 include_once "functions/functions.php";
 $pdo = databaseConnection();
 
+// Delete job industry script
+$industry_id = false;
+if(isset($_GET['industry_id'])){
+    $industry_id = $_GET['industry_id'];
+}
+
+if(isset($_GET['del'])){
+    $sql = "DELETE FROM job_industries WHERE id = :industry_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(":industry_id", $param_industry_id, PDO::PARAM_INT);
+    $param_industry_id = $industry_id;
+    if($stmt->execute()){
+        echo "<script>alert('Job industry has been deleted successfully!'); </script>";
+    }
+}
+
 ?>
 
 <!-- Header Template -->
@@ -66,7 +82,7 @@ $pdo = databaseConnection();
                     <tbody>
                         <td><?= $count++; ?></td>
                         <td><?= $job_industries["industryName"]; ?></td>
-                        <td><a href="">View More </a></td>
+                        <td><a href="index.php?page=admin/jobs/all_job_industries&industry_id=<?=$job_industries['id']; ?>&del=delete" class="text-danger">Delete</a></td>
                     </tbody>
                 <?php endforeach; ?>
             </table>

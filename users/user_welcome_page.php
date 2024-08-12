@@ -321,7 +321,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form action="index.php?page=users/user_welcome_page" method="post" class="login_form">
                     <!-- Finish btn -->
                     <div class="form-group my-4">
-                        <input type="submit" value="Finish" class="btn w-50 text-center">
+                        <input type="submit" value="Finish" class="btn text-center" style="width: 50%;">
                     </div>
                 </form>
             </div>

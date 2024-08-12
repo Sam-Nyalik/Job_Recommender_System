@@ -58,9 +58,6 @@ $pdo = databaseConnection();
                     <th>#</th>
                     <th>Name</th>
                     <th>Profile creation date</th>
-
-                    <!-- In the action, admin should be able to view user profile, and job applications -->
-                    <th>Action</th> 
                  </thead>
                
                  <?php foreach($database_all_user_data as $all_user_data): ?>
@@ -68,7 +65,6 @@ $pdo = databaseConnection();
                    <td><?= $count++; ?></td>
                    <td><?= $all_user_data["userName"]; ?></td>
                    <td><?= $all_user_data["profileCreationDate"];?></td>
-                   <td><a href="index.php?page=admin/users/individual_user&userId=<?=$all_user_data['userId'];?>">View More</a> </td>
                 </tbody>
                 <?php endforeach; ?>
             </table>

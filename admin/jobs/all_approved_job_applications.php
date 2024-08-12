@@ -1,4 +1,4 @@
-<!-- ALL JOB APPLICATIONS SECTION -->
+<!-- ALL APPROVED JOB APPLICATIONS -->
 
 <?php
 
@@ -23,7 +23,7 @@ $pdo = databaseConnection();
 ?>
 
 <!-- Header Template -->
-<?= headerTemplate('ADMIN | ALL JOB APPLICATIONS'); ?>
+<?= headerTemplate('ADMIN | ALL APPROVED JOB APPLICATIONS'); ?>
 
 <!-- Admin Navbar -->
 <?= adminNavbarTemplate(); ?>
@@ -32,7 +32,7 @@ $pdo = databaseConnection();
 <div class="breadcrumb">
     <div class="container">
         <div class="row">
-            <span><a href="index.php?page=admin/admin_dashboard">Dashboard</a> > All Job Applications</span>
+            <span><a href="index.php?page=admin/admin_dashboard">Dashboard</a> > All Approved Job Applications</span>
         </div>
     </div>
 </div>
@@ -41,19 +41,19 @@ $pdo = databaseConnection();
 <div id="section_title">
     <div class="container">
         <div class="row">
-            <h4 class="text-center">All Job Applications</h4>
+            <h4 class="text-center">All Approved Job Applications</h4>
         </div>
     </div>
 </div>
 
-<!-- Table for all job applications -->
+<!-- Table for all approved job applications -->
 <div id="full_table_display">
     <div class="container">
         <div class="row">
             <table class="table table-bordered table-hover">
-                <!-- Fetch all job applications from the database -->
+                <!-- Fetch all approved job applications from the database -->
                 <?php
-                $sql = $pdo->prepare("SELECT * FROM job_applications WHERE application_status = 0");
+                $sql = $pdo->prepare("SELECT * FROM job_applications WHERE application_status = 1");
                 $sql->execute();
                 $database_all_job_applications = $sql->fetchAll(PDO::FETCH_ASSOC);
                 $count = 1;
@@ -63,10 +63,9 @@ $pdo = databaseConnection();
                     <th>#</th>
                     <th>Candidate Name</th>
                     <th>Candidate Email Address</th>
-                    <!-- <th>Candidate Resume</th> -->
                     <th>Company Hiring</th>
                     <th>Job Title</th>
-                    <th>Action</th>
+                    <th>Status</th>
                 </thead>
 
                 <?php foreach ($database_all_job_applications as $job_applications) :
@@ -79,7 +78,7 @@ $pdo = databaseConnection();
                         <td><?= $job_applications["candidateEmailAddress"]; ?></td>
                         <td><?= $job_applications["companyName"]; ?></td>
                         <td><?= $job_applications["posted_jobTitle"]; ?></td>
-                        <td><a href="index.php?page=admin/jobs/individual_job_application&applicationId=<?= $job_applications['jobApplicationId']; ?>&postedJobId=<?=$job_applications['posted_jobId'];?>&candidateId=<?= $job_applications['candidateId']; ?>">View More</a></td>
+                        <td><span class="text-success">Approved</span></td>
                     </tbody>
                 <?php endforeach; ?>
             </table>

@@ -18,6 +18,12 @@ $pdo = databaseConnection();
 
 ?>
 
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
+
 <!-- Header Template -->
 <?= headerTemplate('ADMIN | EMPLOYMENT TYPES'); ?>
 
@@ -59,22 +65,22 @@ $pdo = databaseConnection();
                 <thead>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                 </thead>
 
                 <?php foreach ($all_database_employment_types as $employment_types) : ?>
                     <tbody>
                         <td><?= $count++; ?></td>
                         <td><?= $employment_types["employmentType_name"]; ?></td>
-                        <td><a href="#">View More</a></td>
+                        <!-- <td><a href="#" style="text-decoration: none;">View More</a> | <a href="" class="text-danger" style="text-decoration: none;">Delete</a> </td> -->
                     </tbody>
                 <?php endforeach; ?>
             </table>
 
             <!-- Link button -->
-            <div class="link_button">
-                <a href="index.php?page=admin/jobs/add_employment_type">Add Employment Type</a>
-            </div>
+            <div class=" link_button">
+                                <a href="index.php?page=admin/jobs/add_employment_type">Add Employment Type</a>
         </div>
     </div>
+</div>
 </div>

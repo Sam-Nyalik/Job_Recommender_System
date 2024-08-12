@@ -77,14 +77,87 @@ $pdo = databaseConnection();
     </div>
 </nav>
 
-<!-- Job Search Section -->
-<!-- <div id="job_search_section">
+<!-- Search form -->
+<div id="search_form">
     <div class="container">
         <div class="row">
-            <h5>Find a Job: <select name="" id=""></select></h5>
+            <div class="col-md-12">
+                <form action="" class="search" method="post">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="">Find a job</label>
+                            </div>
+                        </div>
+
+                        <!-- Select Industry -->
+                        <div class="col-2">
+                            <div class="form-group">
+                                <select name="job_industry" class="form-control">
+                                    <!-- Fetch job industries -->
+                                    <?php
+                                    $sql = $pdo->prepare("SELECT * FROM job_industries");
+                                    $sql->execute();
+                                    $database_all_job_industries = $sql->fetchAll(PDO::FETCH_ASSOC);
+                                    ?>
+                                    <option disabled selected>Industry</option>
+                                    <?php foreach ($database_all_job_industries as $job_industries) : ?>
+                                        <option value="<?= $job_industries["industryName"]; ?>"><?= $job_industries["industryName"]; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Select Location -->
+                        <div class="col-2">
+                            <div class="form-group">
+                                <select name="" class="form-control">
+                                    <option disabled selected>Location</option>
+                                    <!-- Fetch locations from the database -->
+                                    <?php
+                                    $sql = $pdo->prepare("SELECT * FROM counties");
+                                    $sql->execute();
+                                    $database_all_counties = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+                                    ?>
+
+                                    <?php foreach ($database_all_counties as $counties) : ?>
+                                        <option value="<?= $counties['county_name']; ?>"><?= $counties["county_name"]; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Select Experience Level -->
+                        <div class="col-2">
+                            <div class="form-group">
+                                <select name="" class="form-control">
+                                    <option selected disabled>Experience Level</option>
+                                    <!-- Fetch job levels from the database -->
+                                    <?php
+                                    $sql = $pdo->prepare("SELECT * FROM job_levels");
+                                    $sql->execute();
+                                    $database_all_job_levels = $sql->fetchAll(PDO::FETCH_ASSOC);
+                                    ?>
+                                    <?php foreach ($database_all_job_levels as $job_levels) : ?>
+                                        <option value="<?= $job_levels['name']; ?>"><?= $job_levels["name"]; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Search btn -->
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input type="submit" value="Search" class="btn w-100">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
- </div> -->
+</div>
 
 <!-- Breadcrumb -->
 <div class="breadcrumb">
@@ -116,7 +189,7 @@ $pdo = databaseConnection();
             ?>
 
             <?php foreach ($all_senior_level_jobs as $senior_level_jobs) : ?>
-                <div class="job_links col-md-12 my-2">
+                <div class="job_links col-md-6 my-2">
                     <a href="index.php?page=jobs/individual_job&jobId=<?= $senior_level_jobs['jobId']; ?>">
                         <h1><?= $senior_level_jobs["jobTitle"]; ?></h1>
                     </a>

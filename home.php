@@ -72,7 +72,7 @@ $pdo = databaseConnection();
                 <?php foreach ($database_user_data as $user_data) : ?>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?page=jobs/applied_jobs&userId=<?=$user_data['userId'];?>">Job Applications</a>
+                            <a class="nav-link" href="index.php?page=jobs/applied_jobs&userId=<?= $user_data['userId']; ?>">Job Applications</a>
                         </li>
                         <li class="nav-item">
 
@@ -100,7 +100,7 @@ $pdo = databaseConnection();
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form class="search" method="post">
+                <form action="" class="search" method="post">
                     <div class="row">
                         <div class="col-2">
                             <div class="form-group">
@@ -203,6 +203,42 @@ $pdo = databaseConnection();
     </div>
 </div>
 
+<!-- System workflow icons -->
+<div id="workflow_steps">
+    <div class="container">
+        <div class="row">
+            <div class="title">
+                <h2 class="text-center">System Workflow</h2>
+            </div>
+            <div class="col-3">
+                <!-- Registration -->
+                <img src="icons/add.png" height="50" class="img-fluid img-responsive">
+                <h5>Register/Login</h5>
+            </div>
+
+            <div class="col-2">
+                <img src="icons/right-arrow.png" alt="" class="img-fluid img-responsive">
+            </div>
+
+            <!-- View Job -->
+            <div class="col-3">
+                <img src="icons/data-gathering.png" alt="" class="img-fluid img-responsive">
+                <h5>View Jobs</h5>
+            </div>
+
+            <div class="col-2">
+                <img src="icons/right-arrow.png" alt="" class="img-fluid img-responsive">
+            </div>
+
+            <!-- Apply -->
+            <div class="col-2">
+                <img src="icons/apply.png" alt="" class="img-fluid img-responsive">
+                <h5>Apply</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Suggested Job searches -->
 <div id="suggested_job_searches">
     <div class="container">
@@ -278,9 +314,51 @@ $pdo = databaseConnection();
             </div>
 
             <!-- LIST OF ALL COMPANIES HIRING FROM THE DATABASE -->
+            <?php
+            $sql = $pdo->prepare("SELECT * FROM posted_jobs ORDER BY date_created DESC LIMIT 4");
+            $sql->execute();
+            $all_database_companies = $sql->fetchAll(PDO::FETCH_ASSOC);
+            ?>
+
+            <?php foreach ($all_database_companies as $companies) : ?>
+                <div class="col-md-3">
+                    <h5><?= $companies['companyName']; ?></h5>
+                </div>
+            <?php endforeach; ?>
 
             <div class="explore_all_jobs">
                 <a href="index.php?page=jobs/companies_hiring">View all companies hiring</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <h3>Nyalik JRS</h3>
+                <p>At Nyalik JRS, we leverage cutting-edge technology to connect job seekers with their ideal career opportunities. We strive to bridge the gap between employers and job seekers, ensuring a seamless and efficient hiring process for both parties.</p>
+            </div>
+
+            <div class="col-4">
+                <h5>Useful Links</h5>
+                <a href="index.php?page=home">Home</a><br>
+                <a href="index.php?page=jobs/explore_all_jobs">All Jobs</a><br>
+                <a href="index.php?page=users/user_login">Login</a>
+            </div>
+
+            <div class="col-4">
+                <h5>Socials</h5>
+                <img src="icons/facebook.png" class="img-fluid img-responsive"> <span>Facebook</span> <br>
+                <img src="icons/twitter.png" class="img-fluid img-responsive"> <span>X</span> <br>
+                <img src="icons/reddit.png" alt="" class="img-fluid img-responsive"> <span>Reddit</span>
+            </div>
+
+
+            <div class="copyright">
+                <h5>&copy; <?php echo date('Y'); ?> Copyright. Nyalik JRS</h5>
             </div>
         </div>
     </div>

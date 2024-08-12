@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $email = $row["emailAddress"];
                         $hashed_password = $row["password"];
 
-                        // Verfy the password input and the one in the database
+                        // Verify the password input and the one in the database
                         if (password_verify($password, $hashed_password)) {
                             // Passwords match
                             session_start();

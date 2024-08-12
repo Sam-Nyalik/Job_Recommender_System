@@ -130,12 +130,9 @@ $pdo = databaseConnection();
                         <h6><span style="font-weight: bold;">Application Deadline:</span> <span style="font-weight: 300;"><?= $senior_level_jobs["application_deadline"];?></span></h6>
                         <h6 style="font-weight: bold; width: fit-content"><?= $senior_level_jobs["jobEmploymentType"]; ?></h6>
                     </div>
-                <?php } else {
-                ?>
-                    <h3 class="text-center">There are currently no jobs available. Please check back later</h3>
-                <?php }
-                ?>
-            <?php endforeach; ?>
+                
+            
+            <?php } endforeach; ?>
         </div>
     </div>
 </div>
