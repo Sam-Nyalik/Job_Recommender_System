@@ -21,8 +21,8 @@ include_once "functions/functions.php";
 $pdo = databaseConnection();
 
 // Define variables
-$jobTitle = $employmentType = $jobLevel = $jobLocation = $job_salary = $qualifications = $companyHiring = $application_deadline = $jobDescription = "";
-$jobTitle_error = $employmentType_error = $jobLevel_error = $jobLocation_error = $job_salary_error = $qualifications_error = $companyHiring_error = $application_deadline_error = $jobDescription_error = "";
+$jobTitle = $job_industry = $employmentType = $jobLevel = $jobLocation = $job_salary = $qualifications = $companyHiring = $application_deadline = $jobDescription = "";
+$jobTitle_error = $job_industry_error = $employmentType_error = $jobLevel_error = $jobLocation_error = $job_salary_error = $qualifications_error = $companyHiring_error = $application_deadline_error = $jobDescription_error = "";
 
 // Process form data when the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,6 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $jobTitle_error = "Field is required!";
     } else {
         $jobTitle = trim($_POST["jobTitle"]);
+    }
+
+    // Validate job industry
+    if(empty(trim($_POST['job_industry']))){
+        $job_industry_error = "Field is required!";
+    } else {
+        $job_industry = trim($_POST["job_industry"]);
     }
 
     // Validate employment type
@@ -92,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check for errors before dealing with the database
     if (empty($jobTitle_error) && empty($employmentType_error) && empty($jobLevel_error) && empty($jobLocation_error) && empty($job_salary_error) && empty($qualifications_error) && empty($companyHiring_error) && empty($application_deadline_error) && empty($jobDescription_error)) {
         // Prepare an INSERT statement
-        $sql = "INSERT INTO posted_jobs(jobTitle, jobDescription, jobEmploymentType, companyName, coreQualifications, status, jobLocation, job_level, job_salary, application_deadline) VALUES(:jobTitle, :jobDescription, :jobEmploymentType, :companyName, :coreQualifications, :status, :jobLocation, :jobLevel, :job_salary, :application_deadline)";
+        $sql = "INSERT INTO posted_jobs(jobTitle, jobDescription, jobEmploymentType, companyName, coreQualifications, status, jobLocation, job_level, job_salary, application_deadline, job_industry) VALUES(:jobTitle, :jobDescription, :jobEmploymentType, :companyName, :coreQualifications, :status, :jobLocation, :jobLevel, :job_salary, :application_deadline, :job_industry)";
         if ($stmt = $pdo->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":jobTitle", $param_jobTitle, PDO::PARAM_STR);
@@ -105,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(":jobLevel", $param_job_level, PDO::PARAM_STR);
             $stmt->bindParam(":job_salary", $param_job_salary, PDO::PARAM_STR);
             $stmt->bindParam(":application_deadline", $param_application_deadline, PDO::PARAM_STR);
+            $stmt->bindParam(":job_industry", $param_job_industry, PDO::PARAM_STR);
             // Set parameters
             $param_jobTitle = $jobTitle;
             $param_jobDescription = $jobDescription;
@@ -116,6 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_job_level = $jobLevel;
             $param_job_salary = $job_salary;
             $param_application_deadline = $application_deadline;
+            $param_job_industry = $job_industry;
             // Attemept to execute
             if ($stmt->execute()) {
                 // Redirect admin to the all job postings page

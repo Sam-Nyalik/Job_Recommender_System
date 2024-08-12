@@ -123,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <!-- Forgot password link -->
                     <div class="form-group my-3">
-                        <a href="#">Forgot password?</a>
+                        <a href="index.php?page=users/user_forgot_password">Forgot password?</a>
                     </div>
 
                     <!-- Sign In Button -->

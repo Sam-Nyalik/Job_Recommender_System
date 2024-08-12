@@ -100,7 +100,7 @@ $pdo = databaseConnection();
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form action="" class="search" method="post">
+                <form action="index.php?page=job_search_results" class="search" method="post">
                     <div class="row">
                         <div class="col-2">
                             <div class="form-group">
@@ -123,13 +123,14 @@ $pdo = databaseConnection();
                                         <option value="<?= $job_industries["industryName"]; ?>"><?= $job_industries["industryName"]; ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                                <span class="errors text-danger"><?php echo $job_industry_error; ?></span>
                             </div>
                         </div>
 
                         <!-- Select Location -->
                         <div class="col-2">
                             <div class="form-group">
-                                <select name="" class="form-control">
+                                <select name="location" class="form-control">
                                     <option disabled selected>Location</option>
                                     <!-- Fetch locations from the database -->
                                     <?php
@@ -143,13 +144,14 @@ $pdo = databaseConnection();
                                         <option value="<?= $counties['county_name']; ?>"><?= $counties["county_name"]; ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                                <span class="errors text-danger"><?php echo $location_error; ?></span>
                             </div>
                         </div>
 
                         <!-- Select Experience Level -->
                         <div class="col-2">
                             <div class="form-group">
-                                <select name="" class="form-control">
+                                <select name="experience_level" class="form-control">
                                     <option selected disabled>Experience Level</option>
                                     <!-- Fetch job levels from the database -->
                                     <?php
@@ -161,6 +163,7 @@ $pdo = databaseConnection();
                                         <option value="<?= $job_levels['name']; ?>"><?= $job_levels["name"]; ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                                <span class="errors text-danger"><?php echo $experience_level_error; ?></span>
                             </div>
                         </div>
 
