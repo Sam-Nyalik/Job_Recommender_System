@@ -10,7 +10,7 @@ include_once "functions/functions.php";
 $pdo = databaseConnection();
 
 // Check if user is loggedIn or not
-if(!isset($_SESSION["userLoggedIn"]) && $_SESSION["userLoggedIn"] !== true){
+if (!isset($_SESSION["userLoggedIn"]) && $_SESSION["userLoggedIn"] !== true) {
     // Redirect user to the login page
     header("Location: index.php?page=users/user_login");
     exit;
@@ -101,7 +101,7 @@ $count = 1;
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form class="search" method="post">
+                <form action="index.php?page=job_search_results" class="search" method="post">
                     <div class="row">
                         <div class="col-2">
                             <div class="form-group">
@@ -209,7 +209,7 @@ $count = 1;
                         <td><?php
                             if ($applied_jobs["application_status"] == 0) {
                                 echo "<span class='text-danger'>Received. Please wait for feedback</span>";
-                            } elseif($applied_jobs["application_status"] == 2) {
+                            } elseif ($applied_jobs["application_status"] == 2) {
                                 echo "<span class='text-success'>Application has been declined. Please try again when there is an opening</span>";
                             } else {
                                 echo "<span class='text-success'>Application approved. You will receive a call</span>";

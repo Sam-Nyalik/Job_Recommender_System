@@ -75,7 +75,6 @@ $pdo = databaseConnection();
                             <a class="nav-link" href="index.php?page=jobs/applied_jobs&userId=<?= $user_data['userId']; ?>">Job Applications</a>
                         </li>
                         <li class="nav-item">
-
                         </li>
                         <li class="nav-item">
                             <a href="index.php?page=users/user_logout" class="nav-link">Logout</a>
@@ -194,7 +193,7 @@ $pdo = databaseConnection();
                     <a href="index.php?page=users/user_login" class="signIn_link">Sign in with email</a>
                 <?php } else {
                 ?>
-                    <a href="index.php?page=jobs/job_search" class="signIn_link">Search for jobs here</a>
+                    <a href="index.php?page=jobs/suggested_jobs" class="signIn_link">Suggested Jobs</a>
                 <?php }
                 ?>
             </div>

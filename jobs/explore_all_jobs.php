@@ -54,7 +54,7 @@ $pdo = databaseConnection();
                 <?php foreach ($database_user_data as $user_data) : ?>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Job Applications</a>
+                            <a class="nav-link" href="index.php?page=jobs/applied_jobs">Job Applications</a>
                         </li>
                         <li class="nav-item">
 
