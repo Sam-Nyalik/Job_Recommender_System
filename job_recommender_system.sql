@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 12, 2024 at 11:50 AM
+-- Generation Time: Oct 06, 2024 at 02:57 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -41,8 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `userName`, `emailAddress`, `password`, `date_created`, `updation_date`) VALUES
-(4, 'Sam Nyalik Jr', 'snyalik@gmail.com', '$2y$10$/Cmfi7uTooWDggMlFz4HsOFS8ysUWcda0rHz37NnHK.CZlnV5cih2', '2024-08-06 22:02:19', '2024-08-12 00:39:59'),
-(5, 'wendy carren', 'wendy@gmail.com', '$2y$10$i7dHNt5zQLDBekNTCjKlT.Jbd15J9mshwU3JU31.n9HbVe6AXZtxq', '2024-08-06 22:09:13', NULL);
+(4, 'Sam Nyalik Jr', 'snyalik@gmail.com', '$2y$10$/Cmfi7uTooWDggMlFz4HsOFS8ysUWcda0rHz37NnHK.CZlnV5cih2', '2024-08-06 22:02:19', '2024-08-12 00:39:59');
 
 -- --------------------------------------------------------
 
@@ -65,7 +64,9 @@ CREATE TABLE `counties` (
 INSERT INTO `counties` (`id`, `county_name`, `date_created`, `updation_date`, `users`) VALUES
 (1, 'Nairobi County', '2024-05-25 02:10:14', '2024-07-30 15:04:14', NULL),
 (2, 'Mombasa County', '2024-05-27 11:16:33', '2024-07-30 15:04:06', NULL),
-(3, 'Nakuru County', '2024-06-03 18:44:32', '2024-07-30 15:03:58', NULL);
+(3, 'Nakuru County', '2024-06-03 18:44:32', '2024-07-30 15:03:58', NULL),
+(5, 'Kilifi County', '2024-09-04 11:32:11', NULL, NULL),
+(6, 'Homabay County', '2024-09-04 11:32:21', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -127,9 +128,7 @@ INSERT INTO `job_applications` (`jobApplicationId`, `candidateName`, `candidateE
 (5, 'Theo Omondi', 'theo@gmail.com', 6, 'Lynn & Associates', 'Driver', 'Nairobi', 'Driver must be always available', 'Full Time', 7, '2024-07-29 08:30:42', '2024-08-12 12:20:43', 2),
 (6, 'Lynn Kyalo', 'lynn@gmail.com', 10, 'Afripixel Solutions', 'Business Developer', 'Nairobi', '1. Client Acquisition: Identify and pursue new business opportunities through various channels such as networking, cold calling, and online research.\r\n2.  Market Research: Conduct thorough market research to identify potential clients and understand their digital marketing needs.\r\n3. Lead Generation: Develop and implement strategies to generate leads and convert them into clients.\r\n4. Relationship Management: Build and maintain strong relationships with clients, ensuring their needs are understood and met with tailored digital marketing solutions.\r\n5. Sales Presentations: Prepare and deliver compelling presentations and proposals to prospective clients, in collaboration with the Digital Marketing Director.\r\n6. Collaboration: Work closely with the Digital Marketing Director and internal teams to develop effective marketing strategies and campaigns for clients.\r\n7. Negotiation: Assist in negotiating contracts and agreements, ensuring alignment with company goals and client expectations.\r\n8. Performance Tracking: Monitor and report on sales performance, providing insights to the Digital Marketing Director to ensure targets are met or exceeded.\r\n9.  Feedback Loop: Provide feedback to the Digital Marketing Director and internal teams on market trends, client needs, and competitive landscape.', 'Full Time', 6, '2024-07-29 08:55:37', '2024-08-12 03:42:13', 1),
 (7, 'Collo Kiptoo', 'collo@gmail.com', 9, 'Lynn & Associates', 'Driver', 'Nairobi', 'Driver must be always available', 'Full Time', 7, '2024-08-12 02:08:58', '2024-08-12 03:42:05', 2),
-(8, 'Fiona Omolo', 'fiona@gmail.com', 11, 'Afripixel Solutions', 'Business Developer', 'Nairobi', '1. Client Acquisition: Identify and pursue new business opportunities through various channels such as networking, cold calling, and online research.\r\n2.  Market Research: Conduct thorough market research to identify potential clients and understand their digital marketing needs.\r\n3. Lead Generation: Develop and implement strategies to generate leads and convert them into clients.\r\n4. Relationship Management: Build and maintain strong relationships with clients, ensuring their needs are understood and met with tailored digital marketing solutions.\r\n5. Sales Presentations: Prepare and deliver compelling presentations and proposals to prospective clients, in collaboration with the Digital Marketing Director.\r\n6. Collaboration: Work closely with the Digital Marketing Director and internal teams to develop effective marketing strategies and campaigns for clients.\r\n7. Negotiation: Assist in negotiating contracts and agreements, ensuring alignment with company goals and client expectations.\r\n8. Performance Tracking: Monitor and report on sales performance, providing insights to the Digital Marketing Director to ensure targets are met or exceeded.\r\n9.  Feedback Loop: Provide feedback to the Digital Marketing Director and internal teams on market trends, client needs, and competitive landscape.', 'Full Time', 6, '2024-08-12 02:33:26', '2024-08-12 03:02:05', 1),
-(9, 'Thomas Atin', 'atin@gmail.com', 12, 'Afripixel Solutions', 'Business Developer', 'Nairobi', '1. Client Acquisition: Identify and pursue new business opportunities through various channels such as networking, cold calling, and online research.\r\n2.  Market Research: Conduct thorough market research to identify potential clients and understand their digital marketing needs.\r\n3. Lead Generation: Develop and implement strategies to generate leads and convert them into clients.\r\n4. Relationship Management: Build and maintain strong relationships with clients, ensuring their needs are understood and met with tailored digital marketing solutions.\r\n5. Sales Presentations: Prepare and deliver compelling presentations and proposals to prospective clients, in collaboration with the Digital Marketing Director.\r\n6. Collaboration: Work closely with the Digital Marketing Director and internal teams to develop effective marketing strategies and campaigns for clients.\r\n7. Negotiation: Assist in negotiating contracts and agreements, ensuring alignment with company goals and client expectations.\r\n8. Performance Tracking: Monitor and report on sales performance, providing insights to the Digital Marketing Director to ensure targets are met or exceeded.\r\n9.  Feedback Loop: Provide feedback to the Digital Marketing Director and internal teams on market trends, client needs, and competitive landscape.', 'Full Time', 6, '2024-08-12 03:32:49', '2024-08-12 03:33:37', 1),
-(10, 'Canon Were', 'canon@gmail.com', 13, 'Ensoniq Trading Company', 'Software Engineer', 'Nairobi', '1. Design visually appealing and user-friendly B2B e-commerce websites that meet the needs of business customers\r\n2. Develop wireframes, mockups, and prototypes to communicate design ideas and concepts.\r\n3. Ensure websites are responsive and optimized for performance across various devices and screen sizes.\r\n4. Collaborate with the marketing team to develop and execute digital marketing campaigns across multiple channels, including social media, email, and search engines.\r\n5. Monitor website traffic and performance metrics, and implement strategies to improve SEO and conversion rates.\r\n6. Create and curate engaging content for website, social media, and other digital platforms.\r\n7. Stay up-to-date with industry trends and best practices in web design, user experience, and digital marketing.', 'Internship', 2, '2024-08-12 12:47:33', '2024-08-12 12:48:10', 1);
+(9, 'Thomas Atin', 'atin@gmail.com', 12, 'Afripixel Solutions', 'Business Developer', 'Nairobi', '1. Client Acquisition: Identify and pursue new business opportunities through various channels such as networking, cold calling, and online research.\r\n2.  Market Research: Conduct thorough market research to identify potential clients and understand their digital marketing needs.\r\n3. Lead Generation: Develop and implement strategies to generate leads and convert them into clients.\r\n4. Relationship Management: Build and maintain strong relationships with clients, ensuring their needs are understood and met with tailored digital marketing solutions.\r\n5. Sales Presentations: Prepare and deliver compelling presentations and proposals to prospective clients, in collaboration with the Digital Marketing Director.\r\n6. Collaboration: Work closely with the Digital Marketing Director and internal teams to develop effective marketing strategies and campaigns for clients.\r\n7. Negotiation: Assist in negotiating contracts and agreements, ensuring alignment with company goals and client expectations.\r\n8. Performance Tracking: Monitor and report on sales performance, providing insights to the Digital Marketing Director to ensure targets are met or exceeded.\r\n9.  Feedback Loop: Provide feedback to the Digital Marketing Director and internal teams on market trends, client needs, and competitive landscape.', 'Full Time', 6, '2024-08-12 03:32:49', '2024-08-12 03:33:37', 1);
 
 -- --------------------------------------------------------
 
@@ -304,9 +303,7 @@ INSERT INTO `users` (`userId`, `userName`, `emailAddress`, `password`, `profileP
 (8, 'Tony Brian', 'tony@gmail.com', '$2y$10$doCch5NXJuuqOvf6haATP.6hsFbaelTdvnXHFBpSfhRAysKLl3/lq', 'users/profilePhotos/38122922_1874769109485747_515700154909589504_n.jpg', 'Mombasa', 'Data Science', 'JKUAT Karen', '2024-07-01', '2024-07-01', '', '', '', 'Data Scientist', 'Mombasa', '2024-07-01 16:12:19', NULL, 'Data Science', 1, NULL, 5, 2, 2, 2, ''),
 (9, 'Collo Kiptoo', 'collo@gmail.com', '$2y$10$ioQh8l4c1ITKDJex61o9.OZBkgyWJ9ynQ1STs8z854KylUkrwCnUu', 'users/profilePhotos/image1.jpg', 'Nakuru', 'Mobile Application development', 'JKUAT', '2019-09-03', '2025-11-03', '', '', '', 'Software Engineer', 'Nairobi', '2024-07-03 11:49:36', NULL, 'BSc. Computer Science', 1, NULL, 3, 3, 1, 1, ''),
 (10, 'Lynn Kyalo', 'lynn@gmail.com', '$2y$10$UrLJ.GVlsVPrLSuT6UqUkedHv42kB5okmUlfqzCaA7U20ySm97y8i', 'users/profilePhotos/image1.jpg', 'Nairobi', 'Data Analytics', 'KCA', '2020-01-10', '2024-11-22', '', '', '', 'Software Engineer', 'Nakuru', '2024-07-12 16:04:23', NULL, 'BSc. IT', 1, NULL, 6, 1, 1, 3, ''),
-(11, 'Fiona Omolo', 'fiona@gmail.com', '$2y$10$3B4YGheWxnYsVeyDY60xGep0xmVDfIXR/tidhEmBU.qvNFKRoKaKa', 'users/profilePhotos/image1.jpg', 'Nairobi', 'Programming', '', '', '', 'Advocate', 'Full Time', 'JRO', 'Data Scientist', 'Mombasa', '2024-07-14 22:15:03', NULL, '', NULL, 1, 2, 1, 2, 2, 'users/resumes/SAM-NYALIK CV.pdf'),
-(12, 'Thomas Atin', 'atin@gmail.com', '$2y$10$AjD.RGAnt.DpzQ/0EFdxzuD67ULMlSz.xi0uZZDBfPUO9Z8Co80Fq', 'users/profilePhotos/20545632_1718205608475432_1916377436953848468_o.jpg', 'Mombasa County', 'Data Analytics', '', '', '', 'Lawyer', 'Full Time', 'High Court of Kenya', 'Data Scientist', 'Nairobi County', '2024-08-12 03:32:15', NULL, '', NULL, 1, 6, 2, 2, 1, 'users/resumes/SAM-NYALIK CV.pdf'),
-(13, 'Canon Were', 'canon@gmail.com', '$2y$10$wSFWbfo4ai1JRtTAlY3.W.HnWfkKy2BMjp5EnTkSPcWw5I7Ly22mi', 'users/profilePhotos/image2.jpg', 'Mombasa County', 'Machine Learning', 'The Catholic University of Eastern Africa', '2024-08-12', '2024-08-29', '', '', '', 'Data Scientist', 'Nairobi County', '2024-08-12 12:43:36', NULL, 'BSc. Computer Science', 1, NULL, 4, 2, 2, 1, 'users/resumes/SAM-NYALIK CV.pdf');
+(12, 'Thomas Atin', 'atin@gmail.com', '$2y$10$AjD.RGAnt.DpzQ/0EFdxzuD67ULMlSz.xi0uZZDBfPUO9Z8Co80Fq', 'users/profilePhotos/20545632_1718205608475432_1916377436953848468_o.jpg', 'Mombasa County', 'Data Analytics', '', '', '', 'Lawyer', 'Full Time', 'High Court of Kenya', 'Data Scientist', 'Nairobi County', '2024-08-12 03:32:15', NULL, '', NULL, 1, 6, 2, 2, 1, 'users/resumes/SAM-NYALIK CV.pdf');
 
 --
 -- Indexes for dumped tables
@@ -392,7 +389,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `counties`
 --
 ALTER TABLE `counties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `employmentType`
@@ -404,7 +401,7 @@ ALTER TABLE `employmentType`
 -- AUTO_INCREMENT for table `job_applications`
 --
 ALTER TABLE `job_applications`
-  MODIFY `jobApplicationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `jobApplicationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `job_industries`
